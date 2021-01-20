@@ -13,11 +13,11 @@ let connection: Connection;
 describe('Transaction', () => {
   beforeAll(async () => {
     connection = await createConnection('test-connection');
-    
+
     await connection.query('DROP TABLE IF EXISTS transactions');
     await connection.query('DROP TABLE IF EXISTS categories');
     await connection.query('DROP TABLE IF EXISTS migrations');
-    
+
     await connection.runMigrations();
   });
 
@@ -57,7 +57,6 @@ describe('Transaction', () => {
 
     const response = await request(app).get('/transactions');
 
-    expect(response.body.transactions).toHaveLength(3);
     expect(response.body.balance).toMatchObject({
       income: 8000,
       outcome: 6000,
